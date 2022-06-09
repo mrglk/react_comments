@@ -1,0 +1,47 @@
+.Form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  height: 100%;
+  width: 25%;
+}
+
+.Comment {
+  flex: 0 0 auto;
+  margin-bottom: 20px;
+}
+
+.Area {
+  display: flex;
+  flex-direction: column;
+  width: 420px;
+  flex: 1 1 auto;
+  word-wrap: break-word;
+  overflow-y: scroll;
+  gap: 10px;
+}
+
+.Description {
+  padding-bottom: 0;
+  margin-bottom: 7px;
+}
+
+// .img {
+//   width: 50px;
+//   margin-right: 7px;
+// }
+
+// .comment {
+//     display: flex;
+//     flex-direction: row-reverse;
+//     justify-content: flex-end;
+//     align-items: center;
+//     background-color: antiquewhite;
+//     border-radius: 10px;
+// }
+
+// .comment__inner {
+//     overflow-wrap: break-word;
+//     overflow-y: scroll;
+//     margin-right: 7px;
+// }
