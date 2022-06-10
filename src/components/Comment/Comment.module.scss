@@ -1,0 +1,23 @@
+.Wrapper {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: antiquewhite;
+  border-radius: 10px;
+}
+
+.Wrapper:first-child {
+  background-color: rgb(255, 219, 173);
+}
+
+.Comment {
+  overflow-wrap: break-word;
+  overflow-y: scroll;
+  margin-right: 7px;
+}
+
+Img {
+  width: 50px;
+  margin-right: 7px;
+}
