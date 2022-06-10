@@ -6,11 +6,7 @@ export default function Comment(props) {
       <p className={styles.Comment}>
         {props.name}: {props.comment}
       </p>
-      <img
-        className={styles.Img}
-        alt="Avatar"
-        src="https://cdn0.iconfinder.com/data/icons/clearicons/789/anonim-512.png"
-      />
+      <img className={styles.Img} alt={props.name} src={props.src} />
     </div>
   );
 }

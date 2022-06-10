@@ -1,51 +1,89 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./Form.module.scss";
 import Comment from "../Comment/Comment";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 export default function Form() {
-  const [comments, setComments] = useState([]);
+  const [commentsToLocal, setCommentsToLocal] = useLocalStorage("comment", []);
+  const [nameToLocal, setNameToLocal] = useLocalStorage("name", []);
   const [comment, setComment] = useState("");
   const [name, setName] = useState("");
+  const [photo, setPhoto] = useState(
+    "https://cdn0.iconfinder.com/data/icons/clearicons/789/anonim-512.png"
+  );
+  const [error, setError] = useState("");
+  const fileInput = useRef();
 
-  const addComment = (nameInput, textInput) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validationComment(comment)) {
+      addComment(name, comment, photo);
+      setNameToLocal(name);
+      setComment("");
+      setError("");
+    } else {
+      setError("Комментарий должен содержать минимум 3 символа");
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit(e);
+    }
+  };
+
+  const addComment = (nameInput, textInput, fileInput) => {
     if (nameInput && textInput) {
       const newComment = {
         id: new Date().getTime(),
-        avtor: nameInput,
+        autor: nameInput,
         text: checkSpam(textInput),
+        avatar: fileInput,
       };
-      setComments([...comments, newComment]);
+      setCommentsToLocal((commentsToLocal) => [newComment, ...commentsToLocal]);
     }
+  };
+
+  const handleChange = (e) => {
+    let value = e.target.value.trim().replace(/ +/g, " ");
+    e.target.name === "comment" ? setComment(value) : setName(value);
+  };
+
+  const handleChangeFile = (e) => {
+    let file = fileInput.current.files[0];
+    let reader = new FileReader();
+    reader.onload = function (e) {
+      setPhoto(e.target.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const validationComment = (value) => {
+    return value.length < 3 ? false : true;
   };
 
   const checkSpam = (str) => {
     return str.replace(/viagra|xxx/gi, "***");
   };
 
-  const handleChangeComment = (e) => {
-    setComment(e.target.value);
-  };
-
-  const handleChangeName = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    addComment(name, comment);
-  };
-
   useEffect(() => {
-    console.log(comments);
-    setComment("");
-  }, [comments]);
+    if (nameToLocal !== "") {
+      setName(nameToLocal);
+    }
+  }, []);
 
   return (
     <form onSubmit={handleSubmit} className={styles.Form}>
       <h1>Комментарии</h1>
       <div className={styles.Area}>
-        {comments.map((item) => (
-          <Comment key={item.id} name={item.avtor} comment={item.text} />
+        {commentsToLocal.map((item) => (
+          <Comment
+            key={item.id}
+            name={item.autor}
+            comment={item.text}
+            src={item.avatar}
+            alt={item.autor}
+          />
         ))}
       </div>
       <div className={styles.Comment}>
@@ -58,15 +96,21 @@ export default function Form() {
             name="name"
             id="name"
             value={name}
-            onChange={handleChangeName}
-            required
+            onChange={handleChange}
+            required={true}
           />
         </div>
         <div>
           <label htmlFor="photo">Аватар</label>
         </div>
         <div>
-          <input type="file" name="file" id="file" />
+          <input
+            type="file"
+            name="file"
+            id="file"
+            ref={fileInput}
+            onChange={handleChangeFile}
+          />
         </div>
         <label htmlFor="comment" className={styles.Description}>
           Комментарий:
@@ -77,12 +121,15 @@ export default function Form() {
           value={comment}
           rows="10"
           cols="50"
-          minLength="3"
-          onChange={handleChangeComment}
+          minLength={3}
+          required={true}
+          onChange={handleChange}
+          onKeyDown={handleKeyPress}
         />
         <div>
           <button type="submit">Отправить</button>
         </div>
+        <div className={styles.Error}>{error}</div>
       </div>
     </form>
   );
