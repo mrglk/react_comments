@@ -45,7 +45,7 @@ export default function Form() {
   };
 
   const handleChange = (e) => {
-    let value = e.target.value.trim().replace(/ +/g, " ");
+    let value = e.target.value.trimStart().replace(/ +/g, " ");
     e.target.name === "comment" ? setComment(value) : setName(value);
   };
 
@@ -70,7 +70,7 @@ export default function Form() {
     if (nameToLocal !== "") {
       setName(nameToLocal);
     }
-  }, []);
+  }, [nameToLocal]);
 
   return (
     <form onSubmit={handleSubmit} className={styles.Form}>
