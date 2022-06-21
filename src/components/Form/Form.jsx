@@ -89,45 +89,49 @@ export default function Form() {
       <div className={styles.InputsWrapper}>
         <div>
           <label htmlFor="name">Имя *</label>
-        </div>
-        <div>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={name}
-            onChange={handleChange}
-            required={true}
-          />
+          <div>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={name}
+              onChange={handleChange}
+              required={true}
+            />
+          </div>
         </div>
         <div>
           <label htmlFor="photo">Аватар</label>
+          <div>
+            <input
+              type="file"
+              name="file"
+              id="file"
+              ref={fileInput}
+              onChange={handleChangeFile}
+            />
+          </div>
         </div>
         <div>
-          <input
-            type="file"
-            name="file"
-            id="file"
-            ref={fileInput}
-            onChange={handleChangeFile}
+          <label htmlFor="comment">Комментарий:</label>
+          <textarea
+            id="comment"
+            name="comment"
+            value={comment}
+            rows="8"
+            cols="50"
+            placeholder="Введите текст..."
+            minLength={3}
+            required={true}
+            onChange={handleChange}
+            onKeyDown={handleKeyPress}
+            className={styles.Textarea}
           />
         </div>
-        <label htmlFor="comment" className={styles.CommentLabel}>
-          Комментарий:
-        </label>
-        <textarea
-          id="comment"
-          name="comment"
-          value={comment}
-          rows="10"
-          cols="50"
-          minLength={3}
-          required={true}
-          onChange={handleChange}
-          onKeyDown={handleKeyPress}
-        />
         <div>
-          <button type="submit">Отправить</button>
+          <button type="submit" className={styles.Button}>
+            Отправить
+          </button>
         </div>
         <div className={styles.Error}>{error}</div>
       </div>

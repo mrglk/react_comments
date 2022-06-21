@@ -20,11 +20,31 @@
 .InputsWrapper {
   flex: 0 0 auto;
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.CommentLabel {
-  padding-bottom: 0;
-  margin-bottom: 7px;
+.Button {
+  display: inline-block;
+  margin-top: 2px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  line-height: 1;
+  letter-spacing: 0.2px;
+  text-decoration: none;
+  text-align: center;
+  padding: 1rem 2rem 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  background-color: rgb(219, 215, 235);
+
+  &:hover {
+    cursor: pointer;
+    color: rgb(249, 249, 249);
+    background-color: black;
+    transition: background-color 0s ease;
+  }
 }
 
 .Error {
@@ -33,4 +53,9 @@
   font-size: 13px;
   margin: 8px 0;
   color: rgb(204, 21, 21);
+}
+
+input,
+textarea {
+  margin: 2px 0;
 }
