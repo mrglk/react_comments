@@ -101,7 +101,7 @@ export default function Form() {
           </div>
         </div>
         <div>
-          <label htmlFor="photo">Аватар</label>
+          <label htmlFor="photo">Аватар </label>
           <div>
             <input
               type="file"
