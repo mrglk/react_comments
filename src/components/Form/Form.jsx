@@ -75,7 +75,7 @@ export default function Form() {
   return (
     <form onSubmit={handleSubmit} className={styles.Form}>
       <h1>Комментарии</h1>
-      <div className={styles.Area}>
+      <div className={styles.CommentsArea}>
         {commentsToLocal.map((item) => (
           <Comment
             key={item.id}
@@ -86,7 +86,7 @@ export default function Form() {
           />
         ))}
       </div>
-      <div className={styles.Comment}>
+      <div className={styles.InputsWrapper}>
         <div>
           <label htmlFor="name">Имя *</label>
         </div>
@@ -112,7 +112,7 @@ export default function Form() {
             onChange={handleChangeFile}
           />
         </div>
-        <label htmlFor="comment" className={styles.Description}>
+        <label htmlFor="comment" className={styles.CommentLabel}>
           Комментарий:
         </label>
         <textarea

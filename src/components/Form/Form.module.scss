@@ -6,12 +6,7 @@
   width: 25%;
 }
 
-.Comment {
-  flex: 0 0 auto;
-  margin-bottom: 10px;
-}
-
-.Area {
+.CommentsArea {
   display: flex;
   flex-direction: column;
   width: 420px;
@@ -22,7 +17,12 @@
   height: 350px;
 }
 
-.Description {
+.InputsWrapper {
+  flex: 0 0 auto;
+  margin-bottom: 10px;
+}
+
+.CommentLabel {
   padding-bottom: 0;
   margin-bottom: 7px;
 }
