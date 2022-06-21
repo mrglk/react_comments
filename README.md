@@ -4,7 +4,8 @@
 
 ### Запуск проекта
 
-```git clone https://github.com/mrglk/react_comments.git
+```
+git clone https://github.com/mrglk/react_comments.git
 cd react_comments
 npm install
 npm start
